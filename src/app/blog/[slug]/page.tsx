@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import GiscusComments from '@/components/GiscusComments';
 
 export async function generateStaticParams() {
     const slugs = getPostSlugs();
@@ -38,6 +39,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
             </header>
             {/* @ts-expect-error Server Component */}
             <MDXRemote source={post.content} options={options} />
+            <GiscusComments />
         </article>
     );
 }
