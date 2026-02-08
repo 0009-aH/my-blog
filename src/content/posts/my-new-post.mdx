@@ -1,0 +1,89 @@
+---
+title: '完全利用antigravity写一个个人博客网站'
+date: '2024-02-09'
+description: '记录一下完全利用antigravity写一个个人博客的过程'
+tags: ['antigravity', 'fastDevelopment', 'AI']
+---
+
+# 完全利用antigravity写一个个人博客·
+好的，这是我用antigravity写的一个个人博客网站，初次搭建
+
+# 使用的技术栈
+- Next.js 14
+- Tailwind CSS
+- MDX
+- Giscus
+
+# 搭建过程
+
+## 1. 创建项目
+
+```bash
+npx create-next-app@latest my-blog
+```
+
+## 2. 安装依赖
+
+```bash
+npm install next-mdx-remote rehype-pretty-code rehype-slug rehype-autolink-headings giscus
+```
+
+## 3. 配置
+
+```typescript
+// tailwind.config.ts
+plugins: [
+  require('@tailwindcss/typography'),
+],
+```
+
+## 4. 编写内容
+
+```markdown
+---
+title: 'Hello World: My First Post'
+date: '2024-02-08'
+description: 'This is a sample post to test the MDX setup.'
+tags: ['nextjs', 'mdx', 'blog']
+---
+
+# Hello World
+
+Welcome to my new blog! This post is written in **MDX**, which implies I can use React components inside markdown.
+
+## Code Snippet
+
+Here is a code snippet to test syntax highlighting:
+
+```typescript
+const greeting = "Hello, World!";
+console.log(greeting);
+```
+
+## Conclusion
+
+# 总结
+
+这个过程非常顺利，antigravity的智能提示非常棒，几乎不需要自己写代码，只需要提供思路，antigravity就能生成代码，非常适合快速搭建个人博客。
+
+# 遇到的问题
+
+1. 
+mdx格式不是特别方便，还是需要我自己commit到github上发布文章，不过已经不错了
+
+# 期待
+
+期待antigravity能够提供更多的功能，比如
+
+- 直接发布文章
+- 自动生成目录
+- 自动生成标签
+- 自动生成摘要
+- 自动生成关键词
+- 自动生成相关文章
+- 自动生成相关图片
+- 自动生成相关视频 OK
+
+好吧这上面都antigravity补全的，我只是提供思路
+
+
