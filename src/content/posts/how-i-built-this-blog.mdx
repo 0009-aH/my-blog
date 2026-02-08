@@ -1,0 +1,54 @@
+---
+title: 'How I Built This Blog with Next.js 14 and MDX'
+date: '2024-02-10'
+description: 'A deep dive into the technical stack behind my personal blog: Next.js App Router, Tailwind CSS, vs MDX.'
+tags: ['nextjs', 'tutorial', 'web-development']
+---
+
+# How I Built This Blog with Next.js 14 and MDX
+
+Building a personal blog is a rite of passage for many developers. It's a great way to experiment with new technologies and own your content. In this post, I'll share how I built this blog using **Next.js 14**, **Tailwind CSS**, and **MDX**.
+
+## The Tech Stack
+
+- **Next.js 14 (App Router)**: For robust routing and server-side rendering.
+- **Tailwind CSS**: For utility-first styling and a modern look.
+- **MDX**: To write content in Markdown with the power of React components.
+- **shiki**: For beautiful syntax highlighting.
+
+## Why Next.js App Router?
+
+The App Router represents the future of Next.js. It allows for:
+1. **React Server Components (RSC)**: Reducing the client-side JavaScript bundle.
+2. **Simplified Data Fetching**: Fetching data directly in your components.
+3. **Layouts**: Easily sharing UI between routes (like the header and footer).
+
+## Styling with Tailwind
+
+Tailwind CSS makes it incredibly fast to prototype and build designs. I used `@tailwindcss/typography` to style the markdown content effortlessly without writing custom CSS for every heading and paragraph.
+
+```css
+/* tailwind.config.ts */
+plugins: [
+  require('@tailwindcss/typography'),
+],
+```
+
+## MDX Integration
+
+I chose `next-mdx-remote` for flexibility. It allows me to store posts as files and render them securely.
+
+Here is a snippet of how I read the posts:
+
+```typescript
+export function getPostBySlug(slug: string): Post {
+  const realSlug = slug.replace(/\.mdx$/, '');
+  const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // ... processing logic
+}
+```
+
+## Conclusion
+
+This stack provides a perfect balance of performance and developer experience. Stay tuned for more posts!
