@@ -1,44 +1,48 @@
-import { getPostBySlug, getPostSlugs } from '@/lib/mdx';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { POST_QUERY, POSTS_SLUG_QUERY } from '@/sanity/lib/queries';
+import { PortableText, type SanityDocument } from 'next-sanity';
 import GiscusComments from '@/components/GiscusComments';
 
 export async function generateStaticParams() {
-    const slugs = getPostSlugs();
-    return slugs.map((slug) => ({ slug: slug.replace(/\.mdx$/, '') }));
+    const slugs = await sanityFetch<string[]>({
+        query: POSTS_SLUG_QUERY,
+        tags: ['post'],
+    });
+    return slugs.map((slug) => ({ slug }));
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
     const { slug } = params;
-    const post = getPostBySlug(slug);
+    const post = await sanityFetch<SanityDocument>({
+        query: POST_QUERY,
+        params: { slug },
+        tags: ['post'],
+    });
 
-    const options = {
-        mdxOptions: {
-            rehypePlugins: [
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-                [rehypePrettyCode, { theme: 'github-dark' }]
-            ],
-        },
-    };
+    if (!post) {
+        return (
+            <div className="container mx-auto py-12 text-center">
+                <h1 className="text-4xl font-bold">Post not found</h1>
+            </div>
+        );
+    }
 
     return (
         <article className="prose prose-lg dark:prose-invert mx-auto py-12">
             <header className="mb-8 text-center not-prose">
-                <h1 className="text-4xl font-bold mb-4">{post.meta.title}</h1>
+                <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
                 <div className="text-gray-500 text-sm flex justify-center gap-4">
-                    <time dateTime={post.meta.date}>{new Date(post.meta.date).toLocaleDateString()}</time>
-                    {post.meta.tags && (
+                    <time dateTime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString()}</time>
+                    {post.categories && (
                         <div className="flex gap-2">
-                            {post.meta.tags.map(tag => <span key={tag}>#{tag}</span>)}
+                            {post.categories.map((category: string) => <span key={category}>#{category}</span>)}
                         </div>
                     )}
                 </div>
             </header>
-            {/* @ts-expect-error Server Component */}
-            <MDXRemote source={post.content} options={options} />
+            <div className="prose dark:prose-invert">
+                {post.body ? <PortableText value={post.body} /> : null}
+            </div>
             <GiscusComments />
         </article>
     );
