@@ -1,7 +1,8 @@
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { POST_QUERY, POSTS_SLUG_QUERY } from '@/sanity/lib/queries';
-import { PortableText, type SanityDocument } from 'next-sanity';
+import { type SanityDocument } from 'next-sanity';
 import GiscusComments from '@/components/GiscusComments';
+import { PostBody } from '@/components/PostBody';
 
 export async function generateStaticParams() {
     const slugs = await sanityFetch<string[]>({
@@ -40,9 +41,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
                     )}
                 </div>
             </header>
-            <div className="prose dark:prose-invert">
-                {post.body ? <PortableText value={post.body} /> : null}
-            </div>
+            <PostBody content={post.body} />
             <GiscusComments />
         </article>
     );
