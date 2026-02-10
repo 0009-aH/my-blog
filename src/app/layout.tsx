@@ -3,6 +3,8 @@ import { Analytics } from '@vercel/analytics/react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import './globals.css';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import SearchProvider from '@/components/SearchProvider';
 
 export const metadata: Metadata = {
   title: {
@@ -37,22 +39,30 @@ export const metadata: Metadata = {
   },
 };
 
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { SEARCH_POSTS_QUERY } from '@/sanity/lib/queries';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const posts = await sanityFetch<any[]>({
+    query: SEARCH_POSTS_QUERY,
+    tags: ['post'],
+  });
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col bg-white dark:bg-black text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          <main className="flex-grow container mx-auto max-w-4xl px-4 py-8">
-            {children}
-          </main>
-          <Footer />
+          <SearchProvider posts={posts}>
+            <Header />
+            <main className="flex-grow container mx-auto max-w-4xl px-4 py-8">
+              {children}
+            </main>
+            <Footer />
+          </SearchProvider>
         </ThemeProvider>
         <Analytics />
       </body>
