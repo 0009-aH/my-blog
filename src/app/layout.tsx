@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import SearchProvider from '@/components/SearchProvider';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://my-tech-blog.com'), // Replace with your production URL
   title: {
     default: 'My Tech Blog',
     template: '%s | My Tech Blog',
@@ -54,7 +55,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-sans min-h-screen flex flex-col bg-white dark:bg-black text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300">
+      <body className="font-sans min-h-screen flex flex-col antialiased transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SearchProvider posts={posts}>
             <Header />
