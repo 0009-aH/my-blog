@@ -4,11 +4,11 @@ import { groq } from 'next-sanity';
 
 export async function GET() {
   const feed = new RSS({
-    title: 'My Tech Blog',
-    description: 'A personal technical blog built with Next.js and MDX.',
+    title: 'Peng Ji\'s Blog',
+    description: 'The personal blog of Peng Ji (0009-aH).',
     site_url: 'https://my-tech-blog.com', // Replace with your production URL
     feed_url: 'https://my-tech-blog.com/feed.xml', // Replace with your production URL
-    copyright: `${new Date().getFullYear()} My Tech Blog`,
+    copyright: `${new Date().getFullYear()} Peng Ji`,
     language: 'en',
     pubDate: new Date(),
   });

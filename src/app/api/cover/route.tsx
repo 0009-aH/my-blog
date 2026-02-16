@@ -12,7 +12,7 @@ const contentType = 'image/png';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const title = searchParams.get('title') || 'My Tech Blog';
+    const title = searchParams.get('title') || 'Peng Ji\'s Blog';
     const summary = searchParams.get('summary') || 'Explore the latest in web development and technology.';
 
     return new ImageResponse(
@@ -100,7 +100,7 @@ export async function GET(request: Request) {
                             background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
                         }}
                     />
-                    <span style={{ fontSize: 24, color: '#e4e4e7', fontWeight: 600 }}>My Tech Blog</span>
+                    <span style={{ fontSize: 24, color: '#e4e4e7', fontWeight: 600 }}>Peng Ji&apos;s Blog</span>
                 </div>
             </div>
         ),

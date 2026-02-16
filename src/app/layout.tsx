@@ -9,23 +9,23 @@ import SearchProvider from '@/components/SearchProvider';
 export const metadata: Metadata = {
   metadataBase: new URL('https://my-tech-blog.com'), // Replace with your production URL
   title: {
-    default: 'My Tech Blog',
-    template: '%s | My Tech Blog',
+    default: 'Peng Ji\'s Blog',
+    template: '%s | Peng Ji\'s Blog',
   },
-  description: 'A personal technical blog built with Next.js and MDX. Sharing thoughts on web development, design, and technology.',
+  description: 'The personal blog of Peng Ji (0009-aH), sharing thoughts on web development, design, and technology.',
   openGraph: {
-    title: 'My Tech Blog',
-    description: 'A personal technical blog built with Next.js and MDX.',
+    title: 'Peng Ji\'s Blog',
+    description: 'The personal blog of Peng Ji (0009-aH).',
     url: 'https://my-tech-blog.com',
-    siteName: 'My Tech Blog',
+    siteName: 'Peng Ji\'s Blog',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'My Tech Blog',
-    description: 'A personal technical blog built with Next.js and MDX.',
-    creator: '@my-tech-blog', // Replace with actual handle
+    title: 'Peng Ji\'s Blog',
+    description: 'The personal blog of Peng Ji (0009-aH).',
+    creator: '@0009-aH',
   },
   robots: {
     index: true,
