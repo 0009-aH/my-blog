@@ -9,6 +9,10 @@ export async function GET() {
   const TODAY = new Date().toISOString().split('T')[0];
 
   try {
+    if (!process.env.SANITY_API_TOKEN) {
+      return NextResponse.json({ error: 'Missing SANITY_API_TOKEN environment variable.' }, { status: 500 });
+    }
+
     // 1. Fetch GitHub Events
     const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public`, {
       headers: {
