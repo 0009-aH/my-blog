@@ -65,7 +65,7 @@ export default function AboutPage() {
                 <SocialLink href="https://github.com/0009-aH" icon={<GithubIcon />} label="GitHub (@0009-aH)" />
             </div>
 
-            <div className="mt-12 bg-gray-50 dark:bg-zinc-900 p-6 rounded-lg not-prose border border-gray-100 dark:border-zinc-800">
+            <div className="mt-12 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm p-6 rounded-lg not-prose border border-gray-200/50 dark:border-zinc-800/50">
                 <h3 className="text-xl font-bold mb-4">Contact</h3>
                 <p className="text-gray-600 dark:text-gray-400">
                     You can find me on GitHub or reach out via email if you have any questions or collaboration ideas.

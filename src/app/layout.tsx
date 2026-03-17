@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import SearchProvider from '@/components/SearchProvider';
+import DynamicBackground from '@/components/DynamicBackground';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://my-tech-blog.com'), // Replace with your production URL
@@ -57,6 +58,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col antialiased transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <DynamicBackground />
           <SearchProvider posts={posts}>
             <Header />
             <main className="flex-grow container mx-auto max-w-4xl px-4 py-8">
